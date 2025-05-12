@@ -1,0 +1,87 @@
+/* NAVBAR STYLES */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 3px 3px 5px #000000 ,
+    -3px -3px 5px #ec5f00 ;
+    background: linear-gradient(135deg, #6a0040 0%, #d94f9f 30%, #ffb8e3 50%, #d94f9f 70%, #6a0040 100%);
+
+
+    padding: 3px 10px;
+    flex-wrap: wrap;
+  }
+  
+  nav img {
+    max-width: 90px;
+    max-height: 80px;
+    border-radius: 10%;
+    margin: 10px 20px;
+  }
+  
+  /* NAVBAR WRAPPER */
+  .navbar {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+  }
+  
+  /* NAVBAR LIST */
+  .navbar ul {
+    display: flex;
+    margin: 0 6rem 0 0;
+    gap: 5rem;
+    flex-wrap: wrap;
+  }
+  
+  /* NAVBAR LIST ITEMS */
+  .navbar ul li {
+    list-style: none;
+  }
+  
+  /* LINKS */
+  .navbar ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: black;
+  }
+  
+  /* HOVER EFFECTS */
+  .navbar li:hover {
+    transition: 0.1s ease-in-out;
+    transform: scale(1.07);
+  }
+  
+  .navbar a:hover {
+    color: white;
+  }
+  
+  /* 🌐 RESPONSIVE STYLES */
+  @media (max-width: 768px) {
+    /* Center navbar items on small screens */
+    .navbar {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    /* Stack the ul items vertically */
+    .navbar ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+  
+    /* Center the logo */
+    nav img {
+      margin: 10px auto;
+    }
+  
+    /* Adjust spacing for smaller devices */
+    .navbar ul li a {
+      font-size: 16px; /* Slightly smaller font on mobile */
+    }
+  }
+  

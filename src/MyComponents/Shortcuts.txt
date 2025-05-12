@@ -1,0 +1,2 @@
+ctrl + shift + L: To multiselect same items at once
+ctrl + D: press as long as you want to multiselect one by one manually all the same items 

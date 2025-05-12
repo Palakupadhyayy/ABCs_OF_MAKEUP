@@ -1,0 +1,167 @@
+/* 🌟 Container Styling */
+.registration {
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #6a0040 0%, #d94f9f 30%, #ffb8e3 50%, #d94f9f 70%, #6a0040 100%);
+
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .heading h2{ 
+    text-align: center;
+    font-size: 2rem;
+    color: #000000;
+    margin: 2rem auto;
+  }
+
+
+  /* 🎨 Title */
+  .registration h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: #000000;
+    margin-bottom: 1.5rem;
+  }
+ 
+  /* 🏷️ Labels */
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 0.50rem;
+    display: block;
+  }
+  
+  /* ✏️ Inputs, Selects, Textareas */
+  input,
+  select,
+  textarea {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 9px 12px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    font-size: 12px;
+    transition: all 0.3s ease-in-out;
+    background-color: #fafafa;
+  }
+  
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #7f5af0;
+    background-color: #a7a7a7;
+    box-shadow: 0 0 5px rgba(255, 239, 239, 0.5);
+    outline: none;
+  }
+  
+  /* 🧍 Gender Radio Buttons - Stay in 1 Line Always */
+  .gender-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; 
+    gap: 20px;
+    overflow-x: auto;
+  }
+  
+  .gender-options label {
+    display: flex;
+    gap: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .gender-options label:hover {
+    transform: scale(1.05);
+  }
+  
+  /* 📝 Textarea */
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  /* 🎯 Buttons Area */
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-top: 0.75rem;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  /* 🔘 General Button Styling */
+  button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* 🟢 Reset Button */
+  button[type="reset"] {
+    background-color: #00b894;
+  }
+  
+  button[type="reset"]:hover {
+    background-color: green;
+    transform: translateY(2px);
+  }
+  
+  /* 🔴 Submit Button */
+  button[type="submit"] {
+    background-color: #7f5af0;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: rgb(104, 28, 0);
+    transform: translateY(2px);
+  }
+  
+  /* ✨ Active Button Press Effect */
+  button:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+  
+  /* 📱 Responsive Design */
+  @media (max-width: 600px) {
+    .form-buttons {
+      flex-direction: row;
+      flex-wrap: nowwrap;
+    }
+  
+    .form-buttons button {
+      flex: 1 1 48%;
+    }
+  
+    /* Remove wrap from gender buttons even on mobile */
+    .gender-options {
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+    }
+  }
+  
+  /* ❗ Error Input Style */
+  .error {
+    border-color: red !important;
+    background-color: #ffeaea;
+  }
+  
+  /* 🛑 Error Message Text */
+  .error-message {
+    font-size: 0.85rem;
+    color: red;
+    margin-top: 0.2rem;
+  }
+    

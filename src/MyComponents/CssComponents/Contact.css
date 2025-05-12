@@ -1,0 +1,207 @@
+.contact {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+}
+
+.social-media h3 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #000000;
+    margin: 4rem 8rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0 0 40px;
+}
+
+.social-icons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 34px;
+    width: 50px;
+    height: 50px;
+    background: #ffffff; /* Facebook blue */
+    border-radius: 50%;
+    transition: 0.1s ease-in-out;
+} 
+
+.social-icons a:hover {
+  transform: scale(1.1);
+  transition: transform .1s ease;
+}
+
+ /* Icon has been given class to give better box shaoow effects to them relative to their icon */
+#fb {
+    box-shadow: -2px -2px 7px #000000,
+              3px 3px 5px #003eb9;
+    color: #002369;
+}
+#insta {
+    box-shadow: -2px -2px 7px #000000,
+              3px 3px 5px #6d0064;
+    color:#cf00be;          
+}
+#twi {
+    box-shadow: -2px -2px 7px #000000,
+              3px 3px 5px  #000000;
+    color:#000000;           
+}
+#yt {
+  box-shadow: -2px -2px 7px #000000,
+            3px 3px 5px #d10000;
+  color:#d10000;
+} 
+#lin {
+    box-shadow: -2px -2px 7px #000000,
+              3px 3px 5px #0035a0;   
+    color:#0035a0;        
+}
+
+/* Different icons with their different box shadow effects on hovering */
+#fb:hover { 
+  box-shadow: 3px 3px 5px #4267B2 ,
+  -3px -3px 5px #4267B2 ;
+}
+#insta:hover { 
+  box-shadow: 3px 3px 5px #da00c7 ,
+  -3px -3px 5px #da00c7 ;
+}
+#twi:hover { 
+  box-shadow: 3px 3px 5px #000000 ,
+  -3px -3px 5px #000000 ;
+}
+#yt:hover { 
+  box-shadow: 3px 3px 5px #e70c0c ,
+  -3px -3px 5px #e70c0c ;
+}
+#lin:hover { 
+  box-shadow: 3px 3px 5px #0035a0 ,
+  -3px -3px 5px #0035a0 ;
+}
+
+
+
+/* Contact Form */
+.contact-form {
+    width: 300px;
+    margin: 3rem auto;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #6a0040 0%, #d94f9f 30%, #ffb8e3 50%, #d94f9f 70%, #6a0040 100%);
+    /* background: linear-gradient(145deg, #0f2027, #203a43, #2c5364, #56ccf2, #2f80ed); */
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+ /* 🎨 Title */
+.contact-form h3 {
+    text-align: center;
+    font-size: 1.7rem;
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+  /* 🏷️ Labels */
+label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 0.50rem;
+    display: block;
+}
+
+input,
+textarea {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 9px 12px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    font-size: 12px;
+    transition: all 0.3s ease-in-out;
+    background-color: #fafafa;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #00e1ff;
+    background-color: #ccc8c8;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+/* 📝 Textarea */
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* 🎯 Buttons Area */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-top: 0.75rem;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+  /* 🔘 General Button Styling */
+button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+      
+/* 🔴 Submit Button */
+button[type="send"] {
+    background-color: #00798f;
+}
+      
+button[type="send"]:hover {
+    background-color: rgb(0, 42, 66);
+    transform: translateY(2px);
+}
+      
+ /* ✨ Active Button Press Effect */
+ button:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+
+  /* 📱 Responsive Design */
+  @media (max-width: 200px) {
+    .form-buttons {
+      flex-direction: row;
+      flex-wrap: nowwrap;
+    }
+  
+    .form-buttons button {
+      flex: 1 1 48%;
+    }
+  }
+
+  /* ❗ Error Input Style */
+  .error {
+    border-color: red !important;
+    background-color: #ffeaea;
+  }
+  
+  /* 🛑 Error Message Text */
+  .error-message {
+    font-size: 0.85rem;
+    color: red;
+    margin-top: 0.2rem;
+  }
+    
