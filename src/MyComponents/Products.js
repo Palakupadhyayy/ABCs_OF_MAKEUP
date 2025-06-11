@@ -1,4 +1,3 @@
-import React from 'react'
 import './CssComponents/Products.css'
 
 export default function Products(props) {
@@ -85,10 +84,11 @@ export default function Products(props) {
                 <a href=" https://amzn.in/d/gq27nWj" className="product-btn"  target="_blank" rel="noreferrer">Buy Now</a>  
               </div>
             </div> 
+            </div>
           <br/><br/><br/> <br/> 
           
+          
           {/* Face Product List */}
-
           <h3>Face Products</h3>
           <div className="face-product"> 
             <div className="product">
@@ -199,7 +199,7 @@ export default function Products(props) {
                 <a href="https://amzn.in/d/9fdZJ9r" className="product-btn"  target="_blank" rel="noreferrer">Buy Now</a>  
               </div>
             </div>
-          </div>   
+          </div>
           
           <br /><br /><br/> <br/> 
 
@@ -444,7 +444,7 @@ export default function Products(props) {
           </div>
           <br /><br />       
         </div>
-    </div>
+  
   )
 }
 

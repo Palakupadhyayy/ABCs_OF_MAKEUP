@@ -1,66 +1,73 @@
-.products p, 
-.products h1 { 
+/* Base styles */
+.products p, .products h1 {
     margin-top: 2rem;
     text-align: center;
 }
 
-.all-products h3{ 
+.all-products h3 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;    
+    align-items: center;
     justify-content: center;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
     font-family: 'Times New Roman', Times, serif;
     font-size: 32px;
     font-weight: bold;
-    color: #272626;  
- 
+    color: #272626;
 }
 
-.skincare,
-.face-product,
-.eye-product,
-.lip-product,
-.haircare {
+/* Product container sections */
+.skincare, .face-product, .eye-product, .lip-product, .haircare {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; /* Even distribution across full width */
     flex-wrap: wrap;
+    gap: 2rem; /* Fixed gap between cards */
+    padding: 0 3%; /* Padding from screen edges */
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-.product{
+/* Individual product cards - 4 per row calculation */
+.product {
     overflow: hidden;
     background: #ffffff;
     color: #21201e;
     text-align: center;
-    width: 250px;
+    width: calc((100% - 6rem) / 4); /* Full width minus gaps, divided by 4 cards */
+    min-width: 200px; /* Minimum width to maintain card integrity */
     height: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 1.2rem;
-    margin: 2rem;
+    margin-bottom: 1rem;
     box-shadow: 5px 15px 25px #070707;
+    transition: transform 0.3s ease;
+    flex-shrink: 0; /* Prevent cards from shrinking */
 }
 
-.product:hover img{
+.product:hover img {
     transform: scale(1.1);
 }
 
-.product:hover { 
+.product:hover {
     box-shadow: 5px 15px 25px #070707;
+    transform: translateY(-5px);
 }
 
 .product img {
     height: 180px;
+    width: auto;
+    max-width: 90%;
     margin: 1.5rem;
     transition: all 0.5s;
+    object-fit: contain;
 }
 
-.product a:link, 
-.product a:visited { 
+.product a:link, .product a:visited {
     font-size: 14px;
     color: #ececec;
     display: inline-block;
@@ -73,22 +80,232 @@
     transition: all 0.2s;
     font-weight: bold;
     box-shadow: 5px 5px 10px #070707;
-} 
+}
 
-
-.product a:hover{
+.product a:hover {
     transform: scale(1.1);
 }
- 
+
 .product-info {
     margin: 0%;
     width: 100%;
     background: linear-gradient(135deg, #6a0040 0%, #d94f9f 30%, #ffb8e3 50%, #d94f9f 70%, #6a0040 100%);
+    padding: 0.5rem;
 }
 
 .product-title {
     margin-top: 0.75rem;
+    padding: 0 0.5rem;
+    font-size: 1rem;
 }
 
+/* Responsive Media Queries */
 
+/* Large screens (1400px and above) - Maintain 4 per row with larger gaps */
+@media screen and (min-width: 1400px) {
+    .skincare, .face-product, .eye-product, .lip-product, .haircare {
+        gap: 3rem; /* Larger gap for bigger screens */
+        padding: 0 4%;
+    }
+    
+    .product {
+        width: calc((100% - 9rem) / 4); /* Adjust for larger gaps */
+        min-width: 250px;
+    }
+}
 
+/* Standard desktop (1200px to 1399px) - 4 per row */
+@media screen and (max-width: 1399px) and (min-width: 1200px) {
+    .skincare, .face-product, .eye-product, .lip-product, .haircare {
+        gap: 2.5rem;
+        padding: 0 3.5%;
+    }
+    
+    .product {
+        width: calc((100% - 7.5rem) / 4);
+        min-width: 220px;
+    }
+}
+
+/* Medium desktop (1024px to 1199px) - 4 per row with smaller cards */
+@media screen and (max-width: 1199px) and (min-width: 1024px) {
+    .all-products h3 {
+        font-size: 28px;
+        margin-top: 1.5rem;
+    }
+    
+    .skincare, .face-product, .eye-product, .lip-product, .haircare {
+        gap: 2rem;
+        padding: 0 3%;
+    }
+    
+    .product {
+        width: calc((100% - 6rem) / 4);
+        min-width: 180px;
+        height: 340px;
+    }
+    
+    .product img {
+        height: 160px;
+        margin: 1.2rem;
+    }
+}
+
+/* Tablets (768px to 1023px) - 3 per row */
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+    .products p, .products h1 {
+        margin-top: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .all-products h3 {
+        font-size: 24px;
+        margin-top: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .skincare, .face-product, .eye-product, .lip-product, .haircare {
+        gap: 1.5rem;
+        padding: 0 2%;
+        justify-content: space-evenly; /* Even spacing for 3 cards */
+    }
+    
+    .product {
+        width: calc((100% - 3rem) / 3); /* 3 per row with gaps */
+        min-width: 180px;
+        height: 320px;
+    }
+    
+    .product img {
+        height: 140px;
+        margin: 1rem;
+    }
+    
+    .product a:link, .product a:visited {
+        font-size: 13px;
+        padding: 0.4rem 0.6rem;
+    }
+}
+
+/* Small tablets (600px to 767px) - 2 per row */
+@media screen and (max-width: 767px) and (min-width: 600px) {
+    .products p, .products h1 {
+        margin-top: 1.5rem;
+        padding: 0 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .all-products h3 {
+        font-size: 22px;
+        margin-top: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .skincare, .face-product, .eye-product, .lip-product, .haircare {
+        gap: 1.5rem;
+        padding: 0 3%;
+        justify-content: space-evenly; /* Even spacing for 2 cards */
+    }
+    
+    .product {
+        width: calc((100% - 1.5rem) / 2); /* 2 per row with gap */
+        min-width: 200px;
+        height: 320px;
+    }
+    
+    .product img {
+        height: 140px;
+        margin: 1rem;
+    }
+    
+    .product a:link, .product a:visited {
+        font-size: 13px;
+        padding: 0.4rem 0.6rem;
+    }
+}
+
+/* Mobile devices (480px to 599px) - 2 per row compact */
+@media screen and (max-width: 599px) and (min-width: 480px) {
+    .products p, .products h1 {
+        margin-top: 1rem;
+        padding: 0 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .all-products h3 {
+        font-size: 20px;
+        margin-top: 0.75rem;
+        padding: 0 0.5rem;
+    }
+    
+    .skincare, .face-product, .eye-product, .lip-product, .haircare {
+        gap: 2%;
+        padding: 0 1%;
+    }
+    
+    .product {
+        width: calc(50% - 2%); /* 2 per row */
+        min-width: 160px;
+        max-width: 200px;
+        height: 300px;
+    }
+    
+    .product img {
+        height: 120px;
+        margin: 0.75rem;
+    }
+    
+    .product a:link, .product a:visited {
+        font-size: 12px;
+        padding: 0.35rem 0.5rem;
+    }
+    
+    .product-title {
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Extra small devices (479px and below) - 1 per row */
+@media screen and (max-width: 479px) {
+    .products p, .products h1 {
+        margin-top: 1rem;
+        padding: 0 0.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .all-products h3 {
+        font-size: 18px;
+        margin-top: 0.75rem;
+        padding: 0 0.5rem;
+    }
+    
+    .skincare, .face-product, .eye-product, .lip-product, .haircare {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 5%;
+    }
+    
+    .product {
+        width: 90%; /* Single column, 90% width */
+        min-width: 250px;
+        max-width: 300px;
+        height: 280px;
+        margin: 0 auto 1rem auto;
+    }
+    
+    .product img {
+        height: 100px;
+        margin: 0.5rem;
+    }
+    
+    .product a:link, .product a:visited {
+        font-size: 11px;
+        padding: 0.3rem 0.4rem;
+    }
+    
+    .product-title {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+    }
+}
