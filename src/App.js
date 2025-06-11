@@ -8,6 +8,7 @@ import Carousel from './MyComponents/Carousel';
 import Content from './MyComponents/Content';
 import MakeUps from './MyComponents/MakeUps';
 import Products from './MyComponents/Products';
+import Quiz from './MyComponents/Quiz';
 import Registration from './MyComponents/Registration';
 import Contact from './MyComponents/Contact';
 
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <Contact title="Contact Me" />
+      </Layout>
+    )
+  },
+  {
+    path: '/quiz',
+    element: (
+      <Layout>
+        <Quiz title="Answer the Quiz"/>
       </Layout>
     )
   },

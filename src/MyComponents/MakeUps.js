@@ -333,19 +333,6 @@ export default function Makeup(props) {
                   <iframe width="560" height="315" src="https://www.youtube.com/embed/Lw4AXu5BbZI?si=_lnyyIfI2kylTlw3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>              
               </li>
-
-              <li>
-                <div className="commentbox">
-                    <h6>Comment Section</h6>
-                      <div>
-                      <form action="/submit-comment" method="POST">
-                        <label for="comment">Leave a Comment:</label><br/><br/>
-                        <textarea id="comment" name="comment" rows="5" cols="50" placeholder="Write your thoughts here..."></textarea><br/><br/>
-                        <button type="submit">Submit</button>
-                      </form>
-                      </div>
-                </div>
-                </li>
             </ul>
           </div>
         )}      
