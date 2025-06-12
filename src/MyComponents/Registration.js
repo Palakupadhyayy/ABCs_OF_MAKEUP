@@ -3,41 +3,79 @@ import './CssComponents/Registration.css';
 
 export default function RegistrationForm(props) {
   const [formData, setFormData] = useState({
-    firstName: '', lastName: '', age: '', email: '', height: '',
-    skintype: '', imageUrl: '', gender: '', about: '',
+    firstName: '', lastName: '', age: '', email: '',
+    heightFeet: '', heightCm: '',
+    skintype: '', gender: '', about: '', image: null,
   });
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: type === 'radio' ? value : value }));
+    const { name, value, type, files } = e.target;
+    if (type === 'file') {
+      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleReset = () => {
     setFormData({
-      firstName: '', lastName: '', age: '', email: '', height: '',
-      skintype: '', imageUrl: '', gender: '', about: '',
+      firstName: '', lastName: '', age: '', email: '',
+      heightFeet: '', heightCm: '',
+      skintype: '', gender: '', about: '', image: null,
     });
+  };
+
+  const isValidEmail = (email) => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
-    if (!formData.firstName || !formData.lastName || !formData.email) {
-      alert("Please fill in First Name, Last Name, and Email");
-      return;
+    // Validation
+    if (!formData.firstName.trim()) return alert("First Name is required");
+    if (!formData.lastName.trim()) return alert("Last Name is required");
+
+    if (!formData.age || parseInt(formData.age) < 16)
+      return alert("Age must be 16 years or older");
+
+    if (!formData.email.trim() || !isValidEmail(formData.email))
+      return alert("Please enter a valid email address");
+
+    if (
+      (!formData.heightFeet && !formData.heightCm) ||
+      (formData.heightFeet && parseFloat(formData.heightFeet) < 0) ||
+      (formData.heightCm && parseFloat(formData.heightCm) < 0)
+    ) {
+      return alert("Please enter a valid positive height in either feet or centimeters");
     }
 
+    if (!formData.skintype) return alert("Please select a skin type");
+    if (!formData.gender) return alert("Please select a gender");
+    if (!formData.about.trim()) return alert("Please fill the About section");
+    if (!formData.image) return alert("Please upload an image");
+
     try {
+      const payload = new FormData();
+      payload.append('firstName', formData.firstName);
+      payload.append('lastName', formData.lastName);
+      payload.append('age', formData.age);
+      payload.append('email', formData.email);
+      payload.append('height', formData.heightFeet ? `${formData.heightFeet} ft` : `${formData.heightCm} cm`);
+      payload.append('skintype', formData.skintype);
+      payload.append('gender', formData.gender);
+      payload.append('about', formData.about);
+      payload.append('image', formData.image);
+
       const response = await fetch('http://localhost:5000/api/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: payload
       });
 
       if (response.ok) {
         alert("Registration successful!");
-        handleReset(); // reset form
+        handleReset();
       } else {
         alert("Error submitting form");
       }
@@ -50,27 +88,86 @@ export default function RegistrationForm(props) {
     <div className="heading">
       <h2>Fill up the Registration Form</h2>
       <div className="registration">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <h3>{props.title}</h3>
 
           <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="Enter your First Name" required />
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="Enter your first name"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Enter your Last Name" required />
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Enter your last name"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="age">Age</label>
-          <input type="number" id="age" name="age" value={formData.age} onChange={handleChange} placeholder="Enter your age" min="0" max="110" step="1" />
+          <input
+            type="number"
+            id="age"
+            name="age"
+            placeholder="Enter your age (16+)"
+            value={formData.age}
+            onChange={handleChange}
+            required
+            min="16"
+          />
 
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter a valid email address" required />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
 
-          <label htmlFor="height">Height</label>
-          <input type="number" id="height" name="height" value={formData.height} onChange={handleChange} placeholder="Enter your height" step="0.01" />
+          <label>Height</label>
+<div style={{ display: 'flex', gap: '10px' }}>
+  <input
+    type="number"
+    name="heightFeet"
+    placeholder="Height in feet"
+    value={formData.heightFeet}
+    onChange={handleChange}
+    min="0"
+    step="0.01" // 👈 Allows decimal feet
+  />
+  <input
+    type="number"
+    name="heightCm"
+    placeholder="Height in cm"
+    value={formData.heightCm}
+    onChange={handleChange}
+    min="0"
+    step="0.01" // 👈 Allows decimal cm
+  />
+</div>
+
 
           <label htmlFor="skintype">Skin Type</label>
-          <select name="skintype" id="skintype" value={formData.skintype} onChange={handleChange}>
-            <option value="">Select</option>
+          <select
+            name="skintype"
+            id="skintype"
+            value={formData.skintype}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select your skin type</option>
             <option value="dry">Dry Skin</option>
             <option value="oily">Oily Skin</option>
             <option value="combination">Combination Skin</option>
@@ -78,21 +175,63 @@ export default function RegistrationForm(props) {
             <option value="sensitive">Sensitive Skin</option>
           </select>
 
-          <label htmlFor="imageUrl">Image URL</label>
-          <input type="url" id="imageUrl" name="imageUrl" value={formData.imageUrl} onChange={handleChange} placeholder="Enter your image URL" />
-
           <label>Gender</label>
           <div className="gender-options">
-            <label><input type="radio" name="gender" value="male" checked={formData.gender === 'male'} onChange={handleChange} /> Male</label>
-            <label><input type="radio" name="gender" value="female" checked={formData.gender === 'female'} onChange={handleChange} /> Female</label>
-            <label><input type="radio" name="gender" value="others" checked={formData.gender === 'others'} onChange={handleChange} /> Others</label>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                checked={formData.gender === 'male'}
+                onChange={handleChange}
+                required
+              />
+              Male
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="female"
+                checked={formData.gender === 'female'}
+                onChange={handleChange}
+              />
+              Female
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="others"
+                checked={formData.gender === 'others'}
+                onChange={handleChange}
+              />
+              Others
+            </label>
           </div>
 
-          <label htmlFor="about">About</label>
+       <label htmlFor="about">About</label>
           <textarea id="about" name="about" value={formData.about} onChange={handleChange} placeholder="Enter your description" rows="4"></textarea>
 
+        <label htmlFor="image" className="custom-file-upload">Image</label>
+        <label htmlFor="image" className="custom-file-upload-box">
+        <div className="upload-icon">
+        <i className="fas fa-file-image"></i>
+        <p>Click to upload your image</p>
+        </div>
+        </label>
+        <input
+        type="file"
+        id="image"
+        name="image"
+        accept="image/*"
+        onChange={handleChange}
+        style={{ display: 'none' }}
+        />
+        {formData.image && <p className="file-name-preview">{formData.image.name}</p>}
+
           <div className="form-buttons">
-            <button type="button" onClick={handleReset}>Reset</button>
+            <button type="reset" onClick={handleReset}>Reset</button>
             <button type="submit">Submit</button>
           </div>
         </form>

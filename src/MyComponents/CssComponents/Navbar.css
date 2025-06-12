@@ -1,141 +1,123 @@
-/* NAVBAR STYLES */
+/* CssComponents/Navbar.css */
+
+/* 1. Sticky Navbar */
 nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  box-shadow: 3px 3px 5px #000000, -3px -3px 5px #ec5f00;
   background: linear-gradient(135deg, #6a0040 0%, #d94f9f 30%, #ffb8e3 50%, #d94f9f 70%, #6a0040 100%);
   padding: 10px 20px;
-  position: relative;
-}
-
-/* LOGO WRAPPER */
-.logo-container {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-nav img {
-  max-width: 90px;
-  max-height: 80px;
-  border-radius: 10%;
-  margin: 10px 20px;
-}
-
-/* HAMBURGER ICON */
-.hamburger {
-  display: none;
-  font-size: 28px;
-  color: white;
-  cursor: pointer;
-  user-select: none;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.5), -3px -3px 5px rgba(236,95,0,0.7);
   z-index: 1000;
 }
 
-/* NAVBAR CONTAINER */
+/* push page content down so it’s not hidden under the fixed nav */
+body {
+  padding-top: 70px; /* adjust if you change nav height */
+}
+
+/* Logo */
+.logo-container img {
+  max-width: 90px;
+  max-height: 80px;
+  border-radius: 10%;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 28px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+/* Desktop menu */
 .navbar {
   display: flex;
+  flex: 1;
   justify-content: flex-end;
-  flex: 2;
 }
-
-/* NAV LIST STYLES */
 .navbar ul {
   display: flex;
-  align-items: center;
+  gap: 2.5rem;
   margin: 0;
   padding: 0;
-  gap: 3.5rem; /* 👈 Spaced out just right */
-  flex-wrap: wrap;
-}
-
-/* NAV ITEMS */
-.navbar ul li {
   list-style: none;
 }
-
-/* NAV LINKS */
-.navbar ul li a {
+.navbar li a {
+  color: white;
   text-decoration: none;
   font-weight: bold;
   font-size: 18px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: white; /* 👈 consistent white text */
-  transition: 0.2s;
+  transition: color 0.2s, transform 0.2s;
+}
+.navbar li:hover a {
+  color: #000;
+  transform: scale(1.05);
 }
 
-/* HOVER EFFECTS */
-.navbar li:hover {
-  transform: scale(1.07);
-}
-
-.navbar a:hover {
-  color: #000000; /* 👈 subtle glow effect */
-}
-
-/* RESPONSIVE STYLES */
+/* Tablet & Mobile */
 @media (max-width: 768px) {
-  nav {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .logo-container {
-    flex: none;
-    margin-right: auto;
-  }
-
+  /* Show hamburger */
   .hamburger {
     display: block;
-    margin-left: auto;
   }
 
+  /* Hide desktop menu */
   .navbar {
     display: none;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
+    position: absolute;
+    top: 100%;
+    right: 0;
     background: #d94f9f;
-    margin-top: 10px;
-    padding-bottom: 10px;
+    flex-direction: column;
+    width: 220px;
+    padding: 1rem 0;
+    border-radius: 0 0 0 10px;
+    box-shadow: -2px 2px 10px rgba(0,0,0,0.3);
   }
-
+  /* Show when open */
   .navbar.open {
     display: flex;
   }
-
   .navbar ul {
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    margin: 1rem 0;
+    gap: 1rem;
   }
-
-  .navbar ul li a {
+  .navbar li a {
+    display: block;
+    padding: 0.5rem 1.5rem;
     font-size: 16px;
-    color: white;
   }
 }
 
+/* Smaller phones */
 @media (max-width: 480px) {
-  .navbar ul {
-    gap: 1rem;
-  }
-
-  .navbar ul li a {
-    font-size: 14px;
-  }
-
   nav {
-    padding: 8px 10px;
+    padding: 8px 12px;
   }
-
-  nav img {
+  .logo-container img {
     max-width: 70px;
     max-height: 60px;
+  }
+  .hamburger {
+    right: 12px;
+  }
+  .navbar {
+    width: 180px;
+  }
+  .navbar li a {
+    font-size: 14px;
   }
 }
