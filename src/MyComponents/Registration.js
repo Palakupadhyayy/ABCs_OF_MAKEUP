@@ -19,15 +19,31 @@ export default function RegistrationForm(props) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.gender) {
-      alert('Please fill in all required fields.');
+
+    // Basic validation
+    if (!formData.firstName || !formData.lastName || !formData.email) {
+      alert("Please fill in First Name, Last Name, and Email");
       return;
     }
-    console.log('Form submitted ✅:', formData);
-    alert('Registration successful!');
-    handleReset();
+
+    try {
+      const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        alert("Registration successful!");
+        handleReset(); // reset form
+      } else {
+        alert("Error submitting form");
+      }
+    } catch (error) {
+      alert("Server error: " + error.message);
+    }
   };
 
   return (

@@ -22,6 +22,7 @@ const router = createBrowserRouter([
         <Content title="What is ABC of MakeUp?" /> {/* Here, children = <Content /> */}
         <Products title="MakeUp Products"/>
         <MakeUps title="Ocassional MakeUp Looks" /> {/* Here, children = <MakeUps /> */}
+        <Quiz title="Answer the Quiz"/>
         <Registration title="Register Here"/>
       </Layout>
     )

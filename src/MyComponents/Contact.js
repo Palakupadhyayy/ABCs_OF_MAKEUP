@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faInstagram, faXTwitter, faYoutube, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import './CssComponents/Contact.css';
 
 const Contact = (props) => {
@@ -13,7 +9,7 @@ const Contact = (props) => {
     email: '',
     message: ''
   });
-  
+
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -23,8 +19,7 @@ const Contact = (props) => {
       ...prev,
       [name]: value
     }));
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -35,54 +30,50 @@ const Contact = (props) => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     }
-    
+
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const newErrors = validateForm();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
-      
-      // Reset form after successful submission
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
       });
-      
-      alert('Message sent successfully!');
-      
+
+      if (response.ok) {
+        alert("Message sent successfully!");
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        alert("Error submitting form");
+      }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Error sending message. Please try again.');
+      alert("Server error: " + error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -90,66 +81,36 @@ const Contact = (props) => {
 
   return (
     <div className="contact">
-      <div className="social-media">   
-        <h3>Social Media Handles</h3>  
+      <div className="social-media">
+        <h3>Social Media Handles</h3>
         <div className="social-icons">
-          <a 
-            id="fb" 
-            href="https://facebook.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-          >
+          <a id="fb" href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
             <FontAwesomeIcon icon={faFacebookF} />
           </a>
-          <a 
-            id="insta" 
-            href="https://instagram.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
+          <a id="insta" href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <FontAwesomeIcon icon={faInstagram} />
           </a>
-          <a 
-            id="twi" 
-            href="https://twitter.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Twitter"
-          >
+          <a id="twi" href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
             <FontAwesomeIcon icon={faXTwitter} />
           </a>
-          <a 
-            id="lin" 
-            href="https://linkedin.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
+          <a id="lin" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <FontAwesomeIcon icon={faLinkedinIn} />
           </a>
-          <a 
-            id="yt" 
-            href="https://youtube.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="YouTube"
-          >
+          <a id="yt" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
             <FontAwesomeIcon icon={faYoutube} />
           </a>
         </div>
       </div>
-      
-      <div className="forms">    
+
+      <div className="forms">
         <form className="contact-form" onSubmit={handleSubmit}>
           <h3>{props.title || 'Get In Touch'}</h3>
-          
+
           <label htmlFor="name">Name *</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name" 
+          <input
+            type="text"
+            id="name"
+            name="name"
             placeholder="Enter your complete name"
             value={formData.name}
             onChange={handleInputChange}
@@ -157,12 +118,12 @@ const Contact = (props) => {
             required
           />
           {errors.name && <div className="error-message">{errors.name}</div>}
-          
+
           <label htmlFor="email">Email *</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
+          <input
+            type="email"
+            id="email"
+            name="email"
             placeholder="Enter a valid email address"
             value={formData.email}
             onChange={handleInputChange}
@@ -172,9 +133,9 @@ const Contact = (props) => {
           {errors.email && <div className="error-message">{errors.email}</div>}
 
           <label htmlFor="message">Message *</label>
-          <textarea 
-            id="message" 
-            name="message" 
+          <textarea
+            id="message"
+            name="message"
             placeholder="Enter your message here"
             rows="4"
             value={formData.message}
@@ -187,7 +148,7 @@ const Contact = (props) => {
           <div className="form-buttons">
             <button type="submit" disabled={isSubmitting}>
               {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>  
+            </button>
           </div>
         </form>
       </div>
